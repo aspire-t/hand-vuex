@@ -1,6 +1,6 @@
 import Vue from 'vue'
-// import Vuex from '@/vuex'
-import Vuex from 'vuex'
+import Vuex from '@/vuex'
+// import Vuex from 'vuex'
 // 1.Vue.use(Vuex);  Vuex是一个对象 install方法
 // 2.Vuex中有一个Store类
 // 3.混入到组件中 增添store属性
@@ -25,6 +25,7 @@ function persists() {
 }
 
 Vue.use(Vuex) // 使用这个插件  内部会调用Vuex中的install方法
+
 const store = new Vuex.Store({
   plugins: [
     // logger(),  // vuex-persists
@@ -37,6 +38,7 @@ const store = new Vuex.Store({
   getters: {
     // 计算属性
     myAge(state) {
+      // console.log(1)
       return state.age + 20
     },
   },
