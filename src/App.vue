@@ -4,11 +4,13 @@
     今年多少岁:{{ this.$store.state.age }}
     <br />
     我的年龄是:{{ this.$store.getters.myAge }}
-    {{ this.$store.getters.myAge }}
-    {{ this.$store.getters.myAge }}
+    <!-- {{ this.$store.getters.myAge }} -->
+    <!-- {{ this.$store.getters.myAge }} -->
     <br />
 
-    <!-- <button @click="$store.commit('changeAge', 5)">同步更新age</button> -->
+    <button @click="$store.commit('changeAge', 5)">同步更新age</button>
+    <button @click="$store.dispatch('changeAge', 10)">异步更新age</button>
+
     <!-- <button @click="$store.commit('b/changeAge',10)">异步更新age</button> -->
   </div>
 </template>

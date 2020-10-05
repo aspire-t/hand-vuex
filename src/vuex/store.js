@@ -30,10 +30,34 @@ export class Store {
       },
       computed,
     })
+
+    // 4. 实现mutations
+    this.mutations = {}
+    this.actions = {}
+
+    forEachValue(options.mutations, (fn, key) => {
+      this.mutations[key] = (payload) => fn(this.state, payload)
+    })
+
+    forEachValue(options.actions, (fn, key) => {
+      this.actions[key] = (payload) => fn(this, payload)
+    })
   }
   get state() {
     // 属性访问器   new Store().state  Object.defineProperty({get()})
     return this._vm._data.$$state
+  }
+  // 在严格模式下  actions 和 mutations是有区别
+  commit = (type, payload) => {
+    // 保证当前this 当前store实例
+    // 调用commit其实就是去找 刚才绑定的好的mutation
+    // this._mutations[type].forEach((mutation) => mutation.call(this, payload))
+    this.mutations[type](payload)
+  }
+
+  dispatch = (type, payload) => {
+    // this._actions[type].forEach((action) => action.call(this, payload))
+    this.actions[type](payload)
   }
 }
 
